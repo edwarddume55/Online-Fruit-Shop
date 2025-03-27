@@ -25,4 +25,5 @@ urlpatterns= [
     path('delete-wishlist-item', wishlist.deletewishlistitem, name="deletewishlistitem"),
 
     path('checkout', checkout.index, name="checkout"),
+    path('placeorder', checkout.placeorder, name="placeorder"),
 ]
