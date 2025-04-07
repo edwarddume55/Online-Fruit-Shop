@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render,redirect
 from .models import *
 from django.contrib import messages
@@ -35,3 +36,24 @@ def productview(request, cate_slug, prod_slug):
         messages.error(request, "no such category found")
         return redirect('collections')
     return render(request,'store/products/view.html', context)
+
+def productlistAjax(request):
+    products = Product.objects.filter(status=0).values_list('name',flat=True)
+    productslist =list(products)
+
+    return JsonResponse(productslist, safe=False)
+
+def searchproduct(request):
+    if request.method == 'POST':
+        searcherdterm =request.POST.get('productsearch')
+        if searcherdterm == "":
+            return redirect(request.META.get('HTTP_REFERER'))
+        else:
+            product=Product.objects.filter(name__contains = searcherdterm).first()
+
+            if product:
+                return redirect('collections/'+product.category.slug+ '/'+ product.slug)
+            else:
+                messages.info(request, "No product matched your search")
+                return redirect(request.META.get('HTTP_REFERER'))
+    return redirect(request.META.get('HTTP_REFERER'))

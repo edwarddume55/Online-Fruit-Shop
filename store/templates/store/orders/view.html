@@ -1,0 +1,81 @@
+{% extends "store/layouts/main.html" %} 
+{% block content %}
+    <div class="py-3 bg-primary">
+        <div class="container">
+            <a class="text-white" href="{% url 'home' %}">Home /</a>
+            <a class="text-white" href="{% url 'myorders' %}">My Orders</a>
+        </div>
+    </div>
+
+    <div class="container mt-3">
+            <div class="row">
+                <div class="col-md-12 ">
+                    <div class="card shadow ">
+                        <div class="card-header ">
+                           <h3 class="mb-0"> Order View</h3>
+                           <a href="{% url 'myorders'%}" class="btn btn-warning float-end text-white"><i class="fa fa-reply"></i>Back</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 ">
+                                    <h4>Shipping Details</h4>
+                                    <hr>
+                                    <label Class="mt-2">First Name</label>
+                                    <div class="border p-1">{{order.fname}}</div>
+                                    <label Class="mt-2">Last Name</label>
+                                    <div class="border p-1">{{order.lname}}</div>
+                                    <label Class="mt-2">Email</label>
+                                    <div class="border p-1">{{order.email}}</div>
+                                    <label Class="mt-2">Phone Number</label>
+                                    <div class="border p-1">{{order.phone}}</div>
+                                    <label Class="mt-2">Address</label>
+                                    <div class="border p-1">
+                                        {{order.address}}
+                                        {{order.city}} ,
+                                        {{order.state}} ,
+                                        {{order.country}}
+                                    </div>
+                                    <label Class="mt-2">Zip Code</label>
+                                    <div class="border p-1">{{order.pincode}}</div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <h4>Order Details</h4>
+                                    <hr>
+                                    <table class="table table-borderd">
+                                        <thead>
+                                            <tr>
+                                                <th> Name</th>
+                                                <th>Quantity</th>
+                                                <th>Image</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for item in orderitems %}
+                                            
+                                            <tr>
+                                                <td>{{item.product.name}}</td>
+                                                <td>{{item.quantity}}</td>
+                                                <td>{{item.price}}</td>
+                                                <td>
+                                                    <img src="{{item.product.product_image.url}}" height="50px" width="50px" alt="product image">
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                    <h4>Grand Total : <span class="float-end"> {{order.total_price}} </span></h4>
+
+                                    <h6 class = "border p-2">Payment Mode : {{order.payment_mode}}</h6>
+                                    <h6 class = "border p-2">Payment Status : {{order.status}}</h6>
+                                    <h6 class = "border p-2">Payment Tracking No: : {{order.tracking_no}}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+
+{% endblock content %}
