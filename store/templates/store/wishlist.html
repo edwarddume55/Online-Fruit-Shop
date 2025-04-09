@@ -4,7 +4,7 @@
 {% extends "store/layouts/main.html" %} 
 {% block content %}
 
-<div class="py-3 bg-primary">
+<div class="py-3 bg-secondary">
     <div class="container">
         <a class="text-white" href="{% url 'home' %}">Home /</a>
         <a class="text-white" href="{% url 'wishlist' %}">Wishlist</a>
@@ -33,7 +33,7 @@
                                 <div class="col-md-3 my-auto">
                                     <input type="hidden" class="prod_id" value="{{ item.product_id }}">
                                     {% csrf_token %}
-                                    <a href="{% url 'productview' item.product.category.slug item.product.slug%}" class="btn btn-primary addToCartBtn">
+                                    <a href="{% url 'productview' item.product.category.slug item.product.slug%}" class="btn btn-secondary ">
                                         <i class="fa fa-eye"></i> View Product
                                     </a>
                                 </div>

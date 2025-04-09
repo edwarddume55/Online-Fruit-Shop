@@ -3,7 +3,7 @@
 
 
 
-<div class="py-3 bg-primary">
+<div class="py-3 bg-secondary">
     <div class="container">
         <a class="text-white" href="{%url 'home'%}">Home /</a>
         <a class="text-white" href="{%url 'collections'%}">Collections /</a>
@@ -27,8 +27,9 @@
                     src="{{item.product_image.url}}" alt="product image" class="img-fluid"/>
                 </div>
                 <h4 class="text-center">{{item.name}}</h4>
-                <span class="float-start">{{item.original_price | stringformat:'d'}}</span>
-                <span class="float-end">{{item.selling_price  | stringformat:'d'}}</span>
+                <span class="float-start"> <small>Original Price Kes:{{item.original_price | stringformat:'d'}}</small></span> 
+                <br>
+                <span class="float-end"> <Small> Selling Price Kes:{{item.selling_price  | stringformat:'d'}} </small></span>
               </div>
             </a>
           </div>
